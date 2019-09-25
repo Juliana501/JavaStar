@@ -1,6 +1,7 @@
 package javastart;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Test {
@@ -57,6 +58,12 @@ public class Test {
                 break;
             case 19:
                 exampleNineteen();
+                break;
+            case 20:
+                exampleTwenty();
+                break;
+            case 21:
+                exampleTwentyone();
                 break;
             default:
                 System.out.println("Некорректный номер задачи!");
@@ -334,9 +341,42 @@ public class Test {
         System.out.println("Результат: " + result);
     }
 
+    public static void exampleTwenty() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Размер массива: ");
+        int size = scanner.nextInt();
+        int[] array = new int[size];
+        System.out.println("Элементы массива:");
+        for (int i = 0; i < size; i++) array[i] = scanner.nextInt();
+
+//       Сортировка вставками
+        for (int left = 0; left < array.length; left++) {
+            int value = array[left];
+            int i = left - 1;
+            while (i >= 0) {
+                if (value < array[i]) array[i + 1] = array[i];
+                else break;
+                i--;
+            }
+            array[i + 1] = value;
+        }
+        System.out.println("Результат:");
+        for (int i = 0; i < size; i++) System.out.print(array[i] + "\t");
+
+    }
+
+    public static void exampleTwentyone() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Курс: ");
+        double rate = scanner.nextDouble();
+
+        System.out.print("Рублей: ");
+        double rubles = scanner.nextDouble();
+        BigDecimal a = new BigDecimal(rubles / rate);
+        BigDecimal roundOff = a.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        System.out.println("Результат: " + roundOff);
+
+    }
 }
-
-
-
 
 
